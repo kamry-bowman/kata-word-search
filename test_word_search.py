@@ -11,9 +11,9 @@ class TestParseTest(unittest.TestCase):
     """
 
     def test_parse_empty_file(self):
-        data = ''
-        self.assertEqual(PuzzleData(words=[], field=[]),
-                         word_search.parse_puzzle(data))
+        with open('test_data/empty_file.txt') as file:
+            self.assertEqual(PuzzleData(words=[], field=[]),
+                            word_search.parse_puzzle(file))
 
 
 if __name__ == '__main__':
