@@ -20,6 +20,12 @@ class TestParseTest(unittest.TestCase):
             self.assertEqual(PuzzleData(words=['BONES', 'JOHNS'], field=[]),
                              word_search.parse_puzzle(file))
 
+    def test_parse_minimal_file(self):
+        with open('test_data/minimal_file.txt') as file:
+            self.assertEqual(PuzzleData(
+                words=['HA'], field=[['H', 'A'], ['L', 'A']]),
+                word_search.parse_puzzle(file))
+
 
 if __name__ == '__main__':
     unittest.main()
