@@ -13,7 +13,12 @@ class TestParseTest(unittest.TestCase):
     def test_parse_empty_file(self):
         with open('test_data/empty_file.txt') as file:
             self.assertEqual(PuzzleData(words=[], field=[]),
-                            word_search.parse_puzzle(file))
+                             word_search.parse_puzzle(file))
+
+    def test_parse_words_no_field(self):
+        with open('test_data/words_no_field.txt') as file:
+            self.assertEqual(PuzzleData(words=['BONES', 'JOHNS'], field=[]),
+                             word_search.parse_puzzle(file))
 
 
 if __name__ == '__main__':
