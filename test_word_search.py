@@ -33,6 +33,16 @@ class TestParseFile(unittest.TestCase):
             with self.assertRaisesRegex(Exception, 'Only square fields are acceptable.'):
                 Puzzle(*parse_puzzle(file))
 
+    def test_make_require_field_puzzle(self):
+        with open('test_data/words_no_field.txt') as file:
+            with self.assertRaisesRegex(Exception, '`words` and `field` properties cannot be empty'):
+                Puzzle(*parse_puzzle(file))
+
+    def test_make_require_words_puzzle(self):
+        with open('test_data/no_words.txt') as file:
+            with self.assertRaisesRegex(Exception, '`words` and `field` properties cannot be empty'):
+                Puzzle(*parse_puzzle(file))
+
 
 class TestPuzzleSolving(unittest.TestCase):
     """
