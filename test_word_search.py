@@ -72,6 +72,26 @@ class TestPuzzleSolving(unittest.TestCase):
         self.assertEqual(puzzle.solve()['STEP'], [[
                          (5, 1), (5, 2), (5, 3), (5, 4)]])
 
+    def test_diagonal_up(self):
+        with open('test_data/diagonal_up.txt') as file:
+            puzzle = Puzzle(*parse_puzzle(file))
+        self.assertEqual(puzzle.solve()['DORK'], [
+            [(3, 5), (2, 4), (1, 3), (0, 2)],
+        ])
+        self.assertEqual(puzzle.solve()['DOG'], [
+            [(3, 5), (4, 4), (5, 3)]
+        ])
+
+    def test_diagonal_down(self):
+        with open('test_data/diagonal_down.txt') as file:
+            puzzle = Puzzle(*parse_puzzle(file))
+        self.assertEqual(puzzle.solve()['DOG'], [
+            [(2, 0), (1, 1), (0, 2)],
+        ])
+        self.assertEqual(puzzle.solve()['DORK'], [
+            [(2, 0), (3, 1), (4, 2), (5, 3)]
+        ])
+
 
 if __name__ == '__main__':
     unittest.main()

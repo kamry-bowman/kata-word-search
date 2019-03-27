@@ -97,4 +97,62 @@ class Puzzle:
                             break
                     else:
                         solutions.append(solution)
+
+                    # check diagonal up right
+                    solution = []
+                    for i in range(len(word)):
+                        if (r - i) < 0:
+                            break
+                        try:
+                            if word[i] == field[r - i][c + i]:
+                                solution.append((c + i, r - i))
+                            else:
+                                break
+                        except IndexError:
+                            break
+                    else:
+                        solutions.append(solution)
+
+                    # check diagonal up left
+                    solution = []
+                    for i in range(len(word)):
+                        if (r - i) < 0 or (c - i) < 0:
+                            break
+                        try:
+                            if word[i] == field[r - i][c - i]:
+                                solution.append((c - i, r - i))
+                            else:
+                                break
+                        except IndexError:
+                            break
+                    else:
+                        solutions.append(solution)
+
+                    # check diagonal down right
+                    solution = []
+                    for i in range(len(word)):
+                        try:
+                            if word[i] == field[r + i][c + i]:
+                                solution.append((c + i, r + i))
+                            else:
+                                break
+                        except IndexError:
+                            break
+                    else:
+                        solutions.append(solution)
+
+                   # check diagonal down left
+                    solution = []
+                    for i in range(len(word)):
+                        if (c - i) < 0:
+                            break
+                        try:
+                            if word[i] == field[r + i][c - i]:
+                                solution.append((c - i, r + i))
+                            else:
+                                break
+                        except IndexError:
+                            break
+                    else:
+                        solutions.append(solution)
         return solutions
