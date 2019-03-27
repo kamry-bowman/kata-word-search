@@ -1,0 +1,7 @@
+BEST,STEP
+A,B,D,L,A,F
+B,F,S,T,N,P,
+L,T,T,A,B,E,
+D,S,S,Z,Z,T,
+P,E,E,I,S,S
+Q,B,B,S,T,A
