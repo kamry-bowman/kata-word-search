@@ -54,6 +54,29 @@ class Puzzle:
                 coords = ','.join(map(lambda pos: repr(pos), case))
                 print(f'{word}: {coords}')
 
+    def _directional_walk(self, word, r, c, dr, dc):
+        """helper method for _search method. Takes a word, a column c,  a row r,
+        as well as a column direction (dc) and a row direction (dr). If each letter
+        in word matches up with movements along dc and dr one letter at a time, returns
+        a list of tuples for each position. If the walk doesn't complete, returns None"""
+        field = self.field
+        solution = []
+
+        for i in range(len(word)):
+            ci = c + (i * dc)
+            ri = r + (i * dr)
+            if ci < 0 or ri < 0:
+                return None
+            try:
+                if word[i] == field[ri][ci]:
+                    solution.append((ci, ri))
+                else:
+                    return None
+            except IndexError:
+                return None
+
+        return solution
+
     def _search(self, word):
         """Searches self.field for word, searching horizontally left to right,
         horizontally right to left"""
@@ -62,60 +85,28 @@ class Puzzle:
         for r in range(len(field)):
             for c in range(len(field[r])):
                 if field[r][c] == word[0]:
-                   # check horizontal forward
-                    solution = []
-                    for i in range(len(word)):
-                        try:
-                            if word[i] == field[r][c + i]:
-                                solution.append((c + i, r))
-                            else:
-                                break
-                        except IndexError:
-                            break
-                    else:
+                    # check horizontal forward
+                    solution = self._directional_walk(
+                        word=word, r=r, c=c, dr=0, dc=1)
+                    if solution:
                         solutions.append(solution)
 
                     # check horizontal reverse
-                    solution = []
-                    for i in range(len(word)):
-                        try:
-                            if (c - i) < 0:
-                                break
-                            if word[i] == field[r][c - i]:
-                                solution.append((c - i, r))
-                            else:
-                                break
-                        except IndexError:
-                            break
-                    else:
+                    solution = self._directional_walk(
+                        word=word, r=r, c=c, dr=0, dc=-1)
+                    if solution:
                         solutions.append(solution)
 
                     # check vertical up
-                    solution = []
-                    for i in range(len(word)):
-                        try:
-                            if (r - i) < 0:
-                                break
-                            if word[i] == field[r - i][c]:
-                                solution.append((c, r - i))
-                            else:
-                                break
-                        except IndexError:
-                            break
-                    else:
+                    solution = self._directional_walk(
+                        word=word, r=r, c=c, dr=-1, dc=0)
+                    if solution:
                         solutions.append(solution)
 
                     # check vertical down
-                    solution = []
-                    for i in range(len(word)):
-                        try:
-                            if word[i] == field[r + i][c]:
-                                solution.append((c, r + i))
-                            else:
-                                break
-                        except IndexError:
-                            break
-                    else:
+                    solution = self._directional_walk(
+                        word=word, r=r, c=c, dr=1, dc=0)
+                    if solution:
                         solutions.append(solution)
 
                     # check diagonal up right
