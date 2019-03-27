@@ -51,7 +51,8 @@ class Puzzle:
         for word in solutions:
             for case in solutions[word]:
                 # converts a list of tuples into a string of comma separated str representations
-                coords = ','.join(map(lambda pos: repr(pos), case))
+                coords = ','.join(
+                    map(lambda pos: f'({pos[0]},{pos[1]})', case))
                 print(f'{word}: {coords}')
 
     def _directional_walk(self, word, r, c, dr, dc):
