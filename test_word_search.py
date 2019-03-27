@@ -37,9 +37,10 @@ class TestPuzzleSolving(unittest.TestCase):
     def test_horizontal_solution(self):
         with open('test_data/horizontal_only.txt') as file:
             puzzle = Puzzle(*parse_puzzle(file))
-        self.assertTrue('BEST' in puzzle.solve())
         self.assertEqual(puzzle.solve()['BEST'], [[
                          (0, 1), (1, 1), (2, 1), (3, 1)]])
+        self.assertEqual(puzzle.solve()['STEP'], [[
+                         (2, 1), (3, 1), (4, 1), (5, 1)]])
 
 
 if __name__ == '__main__':
