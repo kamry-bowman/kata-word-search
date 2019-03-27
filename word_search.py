@@ -5,8 +5,8 @@ PuzzleData = namedtuple('Puzzle_Data', ['words', 'field'])
 
 
 def parse_puzzle(data):
-    """Expects a file object as its data argument. Returns a PuzzleData named tuple with words
-    representing words to be found, an field a 2D list array representing the search field.
+    """Expects a file object as its data argument. Returns a PuzzleData named tuple with `words`
+    a list of words to be found, and `field` a 2D list array representing the searchable letters.
     """
     first_line = data.readline()
     words = first_line.strip().split(',') if first_line else []
@@ -84,8 +84,8 @@ class Puzzle:
         return solution
 
     def _search(self, word):
-        """Searches self.field for word, searching horizontally left to right,
-        horizontally right to left"""
+        """Searches self.field for a specific word in all allowable directions, returning a a list of found word instances.
+        Each word instance is a list of tuples representing coordinates in letter matrix."""
         field = self.field
         solutions = []
         for r in range(len(field)):
