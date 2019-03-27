@@ -84,88 +84,18 @@ class Puzzle:
         solutions = []
         for r in range(len(field)):
             for c in range(len(field[r])):
+
+                # check if first letter is a match
                 if field[r][c] == word[0]:
-                    # check horizontal forward
-                    solution = self._directional_walk(
-                        word=word, r=r, c=c, dr=0, dc=1)
-                    if solution:
-                        solutions.append(solution)
+                    # directional_walk all directions
+                    for dr in range(-1, 2, 1):
+                        for dc in range(-1, 2, 1):
 
-                    # check horizontal reverse
-                    solution = self._directional_walk(
-                        word=word, r=r, c=c, dr=0, dc=-1)
-                    if solution:
-                        solutions.append(solution)
+                            solution = self._directional_walk(
+                                word=word, r=r, c=c, dr=dr, dc=dc)
+                            if solution:
+                                solutions.append(solution)
 
-                    # check vertical up
-                    solution = self._directional_walk(
-                        word=word, r=r, c=c, dr=-1, dc=0)
-                    if solution:
-                        solutions.append(solution)
-
-                    # check vertical down
-                    solution = self._directional_walk(
-                        word=word, r=r, c=c, dr=1, dc=0)
-                    if solution:
-                        solutions.append(solution)
-
-                    # check diagonal up right
-                    solution = []
-                    for i in range(len(word)):
-                        if (r - i) < 0:
-                            break
-                        try:
-                            if word[i] == field[r - i][c + i]:
-                                solution.append((c + i, r - i))
-                            else:
-                                break
-                        except IndexError:
-                            break
-                    else:
-                        solutions.append(solution)
-
-                    # check diagonal up left
-                    solution = []
-                    for i in range(len(word)):
-                        if (r - i) < 0 or (c - i) < 0:
-                            break
-                        try:
-                            if word[i] == field[r - i][c - i]:
-                                solution.append((c - i, r - i))
-                            else:
-                                break
-                        except IndexError:
-                            break
-                    else:
-                        solutions.append(solution)
-
-                    # check diagonal down right
-                    solution = []
-                    for i in range(len(word)):
-                        try:
-                            if word[i] == field[r + i][c + i]:
-                                solution.append((c + i, r + i))
-                            else:
-                                break
-                        except IndexError:
-                            break
-                    else:
-                        solutions.append(solution)
-
-                   # check diagonal down left
-                    solution = []
-                    for i in range(len(word)):
-                        if (c - i) < 0:
-                            break
-                        try:
-                            if word[i] == field[r + i][c - i]:
-                                solution.append((c - i, r + i))
-                            else:
-                                break
-                        except IndexError:
-                            break
-                    else:
-                        solutions.append(solution)
         return solutions
 
 
