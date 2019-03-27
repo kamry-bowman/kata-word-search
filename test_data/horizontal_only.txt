@@ -1,0 +1,7 @@
+BEST
+A,B,D,L,A,F
+B,E,S,T,E,P,
+L,A,E,A,B,O,
+D,A,L,Z,Z,A,
+P,O,I,I,N,M
+Q,I,A,A,L,A

@@ -1,4 +1,4 @@
-from collections import namedtuple
+from collections import namedtuple, defaultdict
 
 PuzzleData = namedtuple('Puzzle_Data', ['words', 'field'])
 
@@ -27,3 +27,30 @@ class Puzzle:
 
     def __repr__(self):
         return f'Puzzle(words={self.words}, field={self.field})'
+
+    def solve(self):
+        solutions = defaultdict(list)
+        for word in self.words:
+            solutions[word].extend(self._hf_search(word))
+        return solutions
+
+    def _hf_search(self, word):
+        """Searches through self.field for word, searching horizontally left to right"""
+        field = self.field
+        solutions = []
+        for r in range(len(field)):
+            for c in range(len(field[r])):
+                if field[r][c] == word[0]:
+                   # check horizontal forward
+                    solution = []
+                    for i in range(len(word)):
+                        try:
+                            if word[i] == field[r][c + i]:
+                                solution.append((c + i, r))
+                            else:
+                                break
+                        except IndexError:
+                            break
+                    else:
+                        solutions.append(solution)
+        return solutions

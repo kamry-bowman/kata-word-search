@@ -29,5 +29,18 @@ class TestParseFile(unittest.TestCase):
                              "Puzzle(words=['HA'], field=[['H', 'A'], ['L', 'A']])")
 
 
+class TestPuzzleSolving(unittest.TestCase):
+    """
+    Tests the ability of the puzzle to find proper solutions
+    """
+
+    def test_horizontal_solution(self):
+        with open('test_data/horizontal_only.txt') as file:
+            puzzle = Puzzle(*parse_puzzle(file))
+        self.assertTrue('BEST' in puzzle.solve())
+        self.assertEqual(puzzle.solve()['BEST'], [[
+                         (0, 1), (1, 1), (2, 1), (3, 1)]])
+
+
 if __name__ == '__main__':
     unittest.main()
