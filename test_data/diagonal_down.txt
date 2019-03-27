@@ -1,7 +1,7 @@
 DOG,DORK
 A,B,D,L,A,F
-B,O,D,O,E,P,
-G,A,E,A,R,O,
-D,R,L,Z,Z,K,
+B,O,D,O,E,P
+G,A,E,A,R,O
+D,R,L,Z,Z,K
 P,O,K,I,K,M
 Q,X,B,D,T,A

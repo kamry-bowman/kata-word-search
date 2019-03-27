@@ -23,6 +23,11 @@ class Puzzle:
     representing the words to be searched, and the letter matrix of the puzzle respectively"""
 
     def __init__(self, words, field):
+        # validate field shape
+        height = len(field)
+        for row in field:
+            if len(row) != height:
+                raise Exception("Only square fields are acceptable.")
         self.words = words
         self.field = field
 
