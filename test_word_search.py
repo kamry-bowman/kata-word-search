@@ -34,8 +34,8 @@ class TestPuzzleSolving(unittest.TestCase):
     Tests the ability of the puzzle to find proper solutions
     """
 
-    def test_horizontal_solution(self):
-        with open('test_data/horizontal_only.txt') as file:
+    def test_horizontal_forward_solution(self):
+        with open('test_data/horizontal_forward.txt') as file:
             puzzle = Puzzle(*parse_puzzle(file))
         self.assertEqual(puzzle.solve()['BEST'], [
             [(0, 1), (1, 1), (2, 1), (3, 1)],
@@ -43,6 +43,15 @@ class TestPuzzleSolving(unittest.TestCase):
         ])
         self.assertEqual(puzzle.solve()['STEP'], [[
                          (2, 1), (3, 1), (4, 1), (5, 1)]])
+
+    def test_horizontal_backward_solution(self):
+        with open('test_data/horizontal_backward.txt') as file:
+            puzzle = Puzzle(*parse_puzzle(file))
+        self.assertEqual(puzzle.solve()['BEST'], [
+            [(3, 4), (2, 4), (1, 4), (0, 4)]
+        ])
+        self.assertEqual(puzzle.solve()['STEP'], [[
+                         (3, 5), (2, 5), (1, 5), (0, 5)]])
 
 
 if __name__ == '__main__':

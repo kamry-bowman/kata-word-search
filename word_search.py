@@ -31,11 +31,12 @@ class Puzzle:
     def solve(self):
         solutions = defaultdict(list)
         for word in self.words:
-            solutions[word].extend(self._hf_search(word))
+            solutions[word].extend(self._search(word))
         return solutions
 
-    def _hf_search(self, word):
-        """Searches through self.field for word, searching horizontally left to right"""
+    def _search(self, word):
+        """Searches self.field for word, searching horizontally left to right,
+        horizontally right to left"""
         field = self.field
         solutions = []
         for r in range(len(field)):
@@ -47,6 +48,21 @@ class Puzzle:
                         try:
                             if word[i] == field[r][c + i]:
                                 solution.append((c + i, r))
+                            else:
+                                break
+                        except IndexError:
+                            break
+                    else:
+                        solutions.append(solution)
+
+                    # check horizontal reverse
+                    solution = []
+                    for i in range(len(word)):
+                        try:
+                            if (c - i) < 0:
+                                break
+                            if word[i] == field[r][c - i]:
+                                solution.append((c - i, r))
                             else:
                                 break
                         except IndexError:
