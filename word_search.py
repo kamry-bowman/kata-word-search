@@ -84,4 +84,17 @@ class Puzzle:
                             break
                     else:
                         solutions.append(solution)
+
+                    # check vertical down
+                    solution = []
+                    for i in range(len(word)):
+                        try:
+                            if word[i] == field[r + i][c]:
+                                solution.append((c, r + i))
+                            else:
+                                break
+                        except IndexError:
+                            break
+                    else:
+                        solutions.append(solution)
         return solutions

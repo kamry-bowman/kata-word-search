@@ -63,6 +63,15 @@ class TestPuzzleSolving(unittest.TestCase):
         self.assertEqual(puzzle.solve()['STEP'], [[
                          (5, 4), (5, 3), (5, 2), (5, 1)]])
 
+    def test_vertical_down_solution(self):
+        with open('test_data/vertical_down.txt') as file:
+            puzzle = Puzzle(*parse_puzzle(file))
+        self.assertEqual(puzzle.solve()['BEST'], [
+            [(1, 2), (1, 3), (1, 4), (1, 5)],
+        ])
+        self.assertEqual(puzzle.solve()['STEP'], [[
+                         (5, 1), (5, 2), (5, 3), (5, 4)]])
+
 
 if __name__ == '__main__':
     unittest.main()
