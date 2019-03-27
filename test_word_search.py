@@ -28,6 +28,11 @@ class TestParseFile(unittest.TestCase):
             self.assertEqual(repr(Puzzle(*parse_puzzle(file))),
                              "Puzzle(words=['HA'], field=[['H', 'A'], ['L', 'A']])")
 
+    def test_make_rectangle_puzzle(self):
+        with open('test_data/rectangle.txt') as file:
+            with self.assertRaisesRegex(Exception, 'Only square fields are acceptable.'):
+                Puzzle(*parse_puzzle(file))
+
 
 class TestPuzzleSolving(unittest.TestCase):
     """

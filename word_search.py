@@ -27,7 +27,7 @@ class Puzzle:
         height = len(field)
         for row in field:
             if len(row) != height:
-                raise Exception("Only square fields are acceptable.")
+                raise Exception('Only square fields are acceptable.')
         self.words = words
         self.field = field
 
